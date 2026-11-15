@@ -1333,7 +1333,9 @@ async fn spawn_download_inner(
             {
                 omniget_core::core::ytdlp::YOUTUBE_VIDEO_INFO_TOTAL_TIMEOUT_SECS
             } else if platform_name == "douyin" {
-                30
+                // yt-dlp may fail first and hand over to the web fallback,
+                // which loads a Douyin page in a hidden webview.
+                75
             } else {
                 omniget_core::core::ytdlp::DEFAULT_VIDEO_INFO_TOTAL_TIMEOUT_SECS
             };

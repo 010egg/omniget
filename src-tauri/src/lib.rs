@@ -424,6 +424,10 @@ pub fn run() {
             omniget_core::platforms::bilibili::set_runtime_provider(Arc::new(
                 DesktopBilibiliRuntimeProvider,
             ));
+            #[cfg(not(target_os = "android"))]
+            omniget_core::platforms::douyin::set_web_provider(Arc::new(
+                platforms::douyin_web::DesktopDouyinWebProvider::new(app.handle().clone()),
+            ));
             core::ytdlp::set_per_domain_cookie_fn(|url| {
                 let parsed = url::Url::parse(url).ok()?;
                 let host = parsed.host_str()?;
